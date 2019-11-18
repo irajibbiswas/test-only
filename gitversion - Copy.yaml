@@ -1,0 +1,43 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - pause:
+        prompt: "please enter the version number"
+      register: version_number
+
+    - set_fact:
+        version: "{{ version_number.user_input }}"
+
+
+
+
+    - name: go to working directory and pull the branch
+      shell:
+        chdir: /etc/ansible/roles/git/test-purpose/
+  #      cmd: git branch -f $version origin/$version ; git checkout $version; git pull origin $version
+        cmd: git branch -f "{{ version_number.user_input }}" origin/"{{ version_number.user_input }}" ; git checkout "{{ version_number.user_input }}"; git pull origin "{{ version_number.user_input }}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Go with Choise 1 Production
+#     - name: Production
+#       import_tasks: production.yaml
+#       when: main_var == "1"
+#
+# ## Go with Choise 2 Staging
+#     - name: Staging
+#       import_tasks: staging.yaml
+#       when: main_var == "2"

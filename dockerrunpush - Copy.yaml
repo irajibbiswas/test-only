@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    date: "{{ lookup('pipe', 'date +%d-%b-%Y-T%H-%M') }}"
+    ecr_image_src_dir: dockerfile
+    ecr_image_name: vrs-es-frontend
+    ecr_image_tags: ['vrs-flexible-frontend-staging-{{ date }}']
+    ecr_region: us-west-2
+    ecr_account_id: '234464546150'
+
+  roles:
+    - role: w3docker-ecr-build

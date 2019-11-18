@@ -1,0 +1,12 @@
+---
+# Image build options.
+ecr_image_buildargs: {}
+
+# Set this to true if you need to pull from ECR for the image build.
+ecr_login_required: false
+
+# Whether to push the built image to ECR.
+ecr_push: true
+
+# AWS account details for ECR.
+ecr_url: "{{ ecr_account_id }}.dkr.ecr.{{ ecr_region }}.amazonaws.com"

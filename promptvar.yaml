@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - pause:
+        prompt: "Which project do you want to work (Number only !!): Enter \n1 - Project VFF  \n2 - Project VRS"
+      register: main_input
+
+    - set_fact:
+        main_var: "{{ main_input.user_input }}"
+
+## Go with Choise 1 Production
+    - name: Production
+      import_tasks: gitversion.yaml
+      when: main_var == "1"
+
+## Go with Choise 2 Staging
+    - name: Staging
+      import_tasks: gitversionvrs.yaml
+      when: main_var == "2"
